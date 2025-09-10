@@ -14,17 +14,20 @@ program init_sine
     amp = 1.0
     pi = 4.0d0*atan(1.0d0)
 
+
+
     init_fpath = './init.nc'
 
     allocate(u(nx,ny), x(nx), y(ny))
 
     do j = 1, ny
         do i = 1, nx
-            u(i,j) = amp * sin(2.0d0*pi*dble(kx)*dble(i)/dble(nx)) * sin(2.0d0*pi*dble(ky)*dble(j)/dble(ny))
+            u(i,j) = amp * sin(pi*dble(kx)*dble(i)/dble(nx)) * sin(pi*dble(ky)*dble(j)/dble(ny))
         end do
     end do
 
     
+    ! 座標の定義
     do i = 1, nx
         x(i) = dble(i)
     end do

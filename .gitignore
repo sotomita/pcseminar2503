@@ -44,9 +44,12 @@
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
+Makefile
 
 # build directory
-build
+#build
+
+bin
 
 #vscode
 .vscode
@@ -56,3 +59,8 @@ build
 *.bin
 *.csv
 *.grib2
+
+# figure
+*png
+*gif
+*mp4
