@@ -40,10 +40,19 @@
 # debug information files
 *.dwo
 
+# cmake
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 
+# build directory
+build
+
+#vscode
 .vscode
 
-build
+# data file
+*.nc
+*.bin
+*.csv
+*.grib2
