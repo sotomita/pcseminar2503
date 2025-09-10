@@ -16,6 +16,7 @@ program solve_heateq
     real(8) kappa       ! 熱伝導率
     real(8), allocatable    ::  u0(:,:)     ! iステップ目の温度
     real(8), allocatable    ::  u1(:,:)     ! (i+1)ステップ目の温度
+    real(8), allocatable    ::  frcng(:,:)  ! 強制項(加熱)
     real(8), allocatable :: x(:)    ! x座標保存用の配列
     real(8), allocatable :: y(:)    ! y座標保存用の配列
     real(8), allocatable :: time(:) ! 時刻保存用の配列
@@ -23,7 +24,7 @@ program solve_heateq
 
     ! NetCDFファイル関連
     character(len=256) init_fpath       ! 初期値のNetCDFファイルのファイルパス
-    character(len=256) forcing_fpath    ! 強制項(熱源)のNetCDFファイルのファイルパス(ただし本プログラムでは使用しない)
+    character(len=256) forcing_fpath    ! 強制項(熱源)のNetCDFファイルのファイルパス
     character(len=256) output_fpath     ! 計算結果を保存するNetCDFファイルのファイルパス
     integer ncid        ! NetCDF ID保存用
     integer varid       ! 変数ID 保存用
@@ -60,6 +61,13 @@ program solve_heateq
     status = nf90_inq_varid(ncid,"u",varid)             ! 変数IDを割り振る
     status = nf90_get_var(ncid,varid,u0)                ! 変数uを読む
     status = nf90_close(ncid)                           ! 初期値NetCDFファイルを閉じる
+
+    ! 強制項を読む
+    status = nf90_open(forcing_fpath,nf90_nowrite,ncid) ! NetCDF IDを割り振る
+    status = nf90_inq_varid(ncid,"q",varid)             ! 変数IDを割り振る
+    status = nf90_get_var(ncid,varid,frcng)                ! 変数uを読む
+    status = nf90_close(ncid)                           ! 強制項NetCDFファイルを閉じる
+
 
     ! 保存用NetCDFファイルを作成
     status = nf90_create(output_fpath,ior(nf90_netcdf4,nf90_clobber),ncid)

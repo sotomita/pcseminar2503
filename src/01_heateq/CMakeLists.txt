@@ -24,3 +24,13 @@ target_link_libraries(heateq PRIVATE
 set_target_properties(heateq PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+add_executable(heateq_f solve_heateq_forcing.f90 read_config.f90)
+target_include_directories(heateq_f PRIVATE ${NETCDF_INCLUDE})
+target_link_libraries(heateq_f PRIVATE
+    ${NETCDF_LIB}/libnetcdff.so
+    ${NETCDF_LIB}/libnetcdf.so
+)
+set_target_properties(heateq_f PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)

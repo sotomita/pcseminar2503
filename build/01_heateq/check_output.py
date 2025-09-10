@@ -6,11 +6,11 @@ import xarray as xr
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-valid_t = int(sys.argv[1])
+# valid_t = int(sys.argv[1])
 
 
 fig_dir = "./fig/output"
-fpath = "./output.nc"
+fpath = "./data/output.nc"
 ds = xr.open_dataset(fpath)
 print(ds)
 

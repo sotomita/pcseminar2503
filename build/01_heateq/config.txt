@@ -1,8 +1,9 @@
-nx = 300
-ny = 200
+nx = 240
+ny = 240
 nt = 10000
 skipt = 1000
 kappa = 1.0d0
 dt = 1.0d-6
-init_fpath = ./init.nc
-output_fpath = ./output.nc
+init_fpath = ./data/init.nc
+output_fpath = ./data/output.nc
+forcing_fpath = ./data/forcing.nc

@@ -9,6 +9,7 @@ program init_sine
 
     integer nx, ny      ! x,y方向の次元
     integer kx,ky       ! x,y方向の波数
+    real(8) dh          ! 水平方向の刻み幅(=dx=dy)
     real(8) amp         ! 初期値の振幅
     integer i,j         ! カウンタ変数
     real(8) pi          ! 円周率
@@ -29,12 +30,13 @@ program init_sine
     ! === 実行文
 
     ! 実験設定
-    nx = 300    ! x方向の次元
-    ny = 200    ! y方向の次元
+    nx = 240    ! x方向の次元
+    ny = 240    ! y方向の次元
     kx = 1      ! x方向の波数
     ky = 2      ! y方向の波数
     amp = 1.0   ! 振幅
     pi = 4.0d0*atan(1.0d0)  !　円周率
+    dh = 1.0/dble(nx-1)   ! 水平方向の刻み幅(x,y方向の長さは1とする)
     
     ! 配列の割り付け
     allocate(u(nx,ny), x(nx), y(ny))
@@ -48,15 +50,15 @@ program init_sine
     
     ! 座標の定義
     do i = 1, nx
-        x(i) = dble(i)
+        x(i) = dble(i-1)*dh
     end do
     do j = 1, ny
-        y(j) = dble(j)
+        y(j) = dble(j-1)*dh
     end do
 
     
     
-    init_fpath = './init.nc'    ! NetCDFファイルのファイルパス
+    init_fpath = './data/init.nc'    ! NetCDFファイルのファイルパス
 
     ! NetCDFファイルを作成，定義モードに入る
     status = nf90_create(init_fpath,ior(nf90_netcdf4,nf90_clobber),ncid)
