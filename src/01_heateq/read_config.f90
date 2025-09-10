@@ -1,3 +1,6 @@
+! 2025年PCゼミ #3　"2次元熱伝導方程式をFortranで解く"
+! 設定ファイル読み込みサブルーチン
+
 subroutine read_config_heateq(config_path, nx, ny, nt, skipt, kappa, dt, init_fpath, output_fpath,forcing_fpath)
     implicit none
     character(len=*), intent(in)  :: config_path
