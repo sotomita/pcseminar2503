@@ -1,12 +1,10 @@
 #! /usr/bin/env python3
 
-import sys
 import os
+import numpy as np
 import xarray as xr
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-
-# valid_t = int(sys.argv[1])
 
 
 fig_dir = "./fig/output"
@@ -16,9 +14,14 @@ print(ds)
 
 os.makedirs(fig_dir, exist_ok=True)
 
-for valid_t in tqdm(range(0, len(ds.t), 1)):
+for t in tqdm(range(0, len(ds.t), 1)):
     fig, ax = plt.subplots(1, 1)
-    cf = ax.pcolormesh(ds["u"].isel(t=valid_t), vmin=-1, vmax=1)
+    ax.set_title(f"step[{t:4d}/{len(ds.t)-1:4d}] time={ds["t"].isel(t=t).values:.4f}")
+    ax.set_xlabel("x")
+    ax.set_ylabel("y")
+
+    cf = ax.pcolormesh(ds["x"], ds["y"], ds["u"].isel(t=t), vmin=-1, vmax=1, cmap="bwr")
+
     plt.colorbar(cf)
-    plt.savefig(f"{fig_dir}/output_{valid_t:04}.png")
+    plt.savefig(f"{fig_dir}/output_{t:04}.png")
     plt.close()

@@ -41,15 +41,15 @@ program solve_heateq
     call read_config_heateq('config.txt', nx, ny, nt, skipt, kappa, dt, init_fpath, output_fpath,forcing_fpath)
     
     dh = 1.0/dble(nx)   ! 水平方向の刻み幅(x,y方向の長さは1とする)
-    len_time = nt/skipt ! 保存する時間ステップ数
+    len_time = nt/skipt+1 ! 保存する時間ステップ数
 
     ! 配列の割り付け
-    allocate(u0(nx,ny),u1(nx,ny),x(nx),y(ny),time(len_time))
+    allocate(u0(nx,ny),u1(nx,ny),frcng(nx,ny),x(nx),y(ny),time(len_time))
 
     ! 時刻を計算
     time(1) = 0
     do t = 2,len_time
-        time(t) = dt*dble(skipt)*dble(t)
+        time(t) = dt*dble(skipt)*dble(t-1)
     enddo
 
     ! 初期値を読む
@@ -65,7 +65,7 @@ program solve_heateq
     ! 強制項を読む
     status = nf90_open(forcing_fpath,nf90_nowrite,ncid) ! NetCDF IDを割り振る
     status = nf90_inq_varid(ncid,"q",varid)             ! 変数IDを割り振る
-    status = nf90_get_var(ncid,varid,frcng)                ! 変数uを読む
+    status = nf90_get_var(ncid,varid,frcng)                ! 変数qを読む
     status = nf90_close(ncid)                           ! 強制項NetCDFファイルを閉じる
 
 
@@ -92,11 +92,11 @@ program solve_heateq
     status = nf90_put_var(ncid,varid,u0,start=[1,1,1],count=[nx,ny,1])
 
     ! 時間積分
-    do t = 1,nt     ! 時間ループ      
+    do t = 1,nt    ! 時間ループ      
         do j = 2,ny-1   ! y方向のループ
             do i = 2,nx-1   ! x方向のループ
                 ! 時間方向は前進Euler法，空間方向は中心差分で離散化し，時間積分する
-                u1(i,j) = u0(i,j) + (dt/dh**2)*(u0(i-1,j)+u0(i+1,j)+u0(i,j-1)+u0(i,j+1)-4.0d0*u0(i,j))
+                u1(i,j) = u0(i,j) + (dt/dh**2)*(u0(i-1,j)+u0(i+1,j)+u0(i,j-1)+u0(i,j+1)-4.0d0*u0(i,j))+dt*frcng(i,j)
             enddo
         enddo        
 
@@ -111,7 +111,7 @@ program solve_heateq
             write(*,*)'t:',t,'/',nt ! 標準出力(ターミナル画面)に現在のステップ数を表示
             
             ! NetCDFファイルに新しいuを追加
-            status = nf90_put_var(ncid,varid,u1,start=[1,1,t/skipt],count=[nx,ny,1])
+            status = nf90_put_var(ncid,varid,u1,start=[1,1,t/skipt+1],count=[nx,ny,1])
         endif       
 
         ! u0を更新
