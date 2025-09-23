@@ -7,7 +7,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 
 # init_sine
-add_executable(init_sine src/init_sine.f90)
+set(SOURCES
+    src/init_sine.f90
+)
+add_executable(init_sine ${SOURCES})
 
 target_include_directories(init_sine PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_directories(init_sine PRIVATE ${CMAKE_SOURCE_DIR}/lib)
@@ -19,3 +22,19 @@ set_target_properties(init_sine PROPERTIES
     INSTALL_RPATH ${CMAKE_SOURCE_DIR}/lib
 )
 
+# forward
+set(SOURCES
+    src/read_config.f90
+    src/forward.f90
+)
+add_executable(forward ${SOURCES})
+
+target_include_directories(forward PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_link_directories(forward PRIVATE ${CMAKE_SOURCE_DIR}/lib)
+
+target_link_libraries(forward PRIVATE netcdff netcdf)
+
+set_target_properties(forward PROPERTIES
+    BUILD_RPATH ${CMAKE_SOURCE_DIR}/lib
+    INSTALL_RPATH ${CMAKE_SOURCE_DIR}/lib
+)
