@@ -20,7 +20,7 @@ for t in tqdm(range(0, len(ds.t), 1)):
     ax.set_xlabel("x")
     ax.set_ylabel("y")
 
-    cf = ax.pcolormesh(ds["x"], ds["y"], ds["u"].isel(t=t), vmin=-1, vmax=1, cmap="bwr")
+    cf = ax.pcolormesh(ds["x"], ds["y"], ds["u"].isel(t=t), vmin=0, vmax=2, cmap="hot_r")
 
     plt.colorbar(cf)
     plt.savefig(f"{fig_dir}/output_{t:04}.png")

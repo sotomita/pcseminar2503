@@ -64,3 +64,6 @@ bin
 *png
 *gif
 *mp4
+
+run/init_sine
+run/forward

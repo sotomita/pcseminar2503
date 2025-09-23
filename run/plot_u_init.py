@@ -17,7 +17,7 @@ ax.set_title(f"initial u")
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 
-cf = ax.pcolormesh(ds["x"], ds["y"], ds["u"], vmin=-1, vmax=1, cmap="bwr")
+cf = ax.pcolormesh(ds["x"], ds["y"], ds["u"], vmin=0, vmax=2, cmap="hot_r")
 
 plt.colorbar(cf)
 plt.savefig(f"{fig_dir}/init.png")

@@ -1,4 +1,8 @@
-# /bin/bash
+#! /bin/bash
 
-cmake -B build
-cmake --build build
+if [ ! -f build/Makefile ]; then
+    cmake -B build
+fi
+
+cd build
+make

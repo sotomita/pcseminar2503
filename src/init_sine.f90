@@ -44,7 +44,7 @@ program init_sine
     ! 初期値を計算
     do j = 1, ny
         do i = 1, nx
-            u(i,j) = amp * sin(pi*dble(kx)*dble(i)/dble(nx)) * sin(pi*dble(ky)*dble(j)/dble(ny))
+            u(i,j) = amp * sin(pi*dble(kx)*dble(i)/dble(nx)) * sin(pi*dble(ky)*dble(j)/dble(ny)) + 1.0d0
         end do
     end do
     

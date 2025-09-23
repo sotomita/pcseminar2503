@@ -21,7 +21,7 @@ ax.set_xlabel("x")
 ax.set_ylabel("y")
 
 cf = ax.pcolormesh(
-    ds["x"], ds["y"], ds["u"].isel(t=t), vmin=-0.01, vmax=0.01, cmap="binary"
+    ds["x"], ds["y"], ds["u"].isel(t=t), vmin=-0.25, vmax=0.25, cmap="binary"
 )
 
 plt.colorbar(cf)
