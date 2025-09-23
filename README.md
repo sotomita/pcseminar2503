@@ -13,7 +13,7 @@ $0 \le x \le 1, 0 \le y \le 1$の範囲で
 u(0,y)=u(1,y)=u(x,0)=u(x,1)=0
 ```
 を解く．
-$u=u(x,y,t)$は無次元温度，$F=F(x,y)$は強制項(熱源)とする．
+$u=u(x,y,t)$は無次元温度，$F=F(x,y)$ は強制項(熱源)とする．
 
 ### 時間・空間離散化
 簡単のため，$x$,$y$方向を同じグリッド数で離散化する．
@@ -67,6 +67,7 @@ u^{(t+1)}(i,j) = u^{(t)}(i,j) + \frac{\delta t}{\delta h^2} \lbrack u^{(t)}(i-1,
 python plot_u_init.py
 ```
 初期値(2次元温度分布)を示した```fig/init/init.png```が出力される．
+![初期値](./doc/image/top/init.png)
 
 ### 2 時間積分
 ```config.txt```に計算設定を記述する．
@@ -97,7 +98,8 @@ python Plot_u_all.py
 ```
 bash animation.bash
 ```
-```fig/animation```以下にmp4形式で出力される．
+```fig/animation```以下にmp4形式で出力される([出力例](./doc/image/top/output.mp4))．
+
 
 ### 3.0 追加
 気象分野でも頻出するPoisson方程式
@@ -110,7 +112,8 @@ bash animation.bash
 ```
 の定常解から求めることができる．(強制項$F$の符号に注意．)  
 つまり，ラプラシアンが$F$となる$u$を求めるためには，熱伝導方程式を十分長い時間積分すればよい．
-```config.txt```の```nt```を変更してみよう．
+```config.txt```の```nt```を変更してみよう．  
+また```plot_u_stable.py```で最終ステップの$u$を描画できる．
 
 
 ### 3.1 より高速に解くためには

@@ -61,9 +61,7 @@ bin
 *.grib2
 
 # figure
-*png
-*gif
-*mp4
+run/fig
 
 run/init_sine
 run/forward
