@@ -1,7 +1,7 @@
 ! 2025年PCゼミ #3　"2次元熱伝導方程式をFortranで解く"
 ! 数値積分プログラム
 
-program solve_heateq
+program forward
     use netcdf  ! NetCDFモジュールを読む
     implicit none   ! 暗黙の型変換は行わない
 
@@ -124,4 +124,4 @@ program solve_heateq
     ! 配列の割り付け解除
     deallocate(u0,u1,x,y,time)
 
-end program solve_heateq
+end program forward
