@@ -43,6 +43,9 @@ u^{(t+1)}(i,j) = u^{(t)}(i,j) + \frac{\delta t}{\delta h^2} \lbrack u^{(t)}(i-1,
 - tqdm
 - ffmpeg
 
+## データダウンロード
+強制項を表すファイルは[ここから](https://drive.google.com/file/d/1ce9I2_WtM37T9ivTh3FmA1rdrERCUxmT/view?usp=sharing)ダウンロードし，```run/data```ディレクトリ直下に置く．
+
 ## Usage
 ### ディレクトリ構造
 |ディレクトリ名|説明|
