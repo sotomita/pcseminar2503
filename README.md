@@ -46,6 +46,36 @@ u^{(t+1)}(i,j) = u^{(t)}(i,j) + \frac{\delta t}{\delta h^2} \lbrack u^{(t)}(i-1,
 ## データダウンロード
 強制項を表すファイルは[ここから](https://drive.google.com/file/d/1ce9I2_WtM37T9ivTh3FmA1rdrERCUxmT/view?usp=sharing)ダウンロードし，```run/data```ディレクトリ直下に置く．
 
+## Build
+```build```ディレクトリ内でビルドする(out-of sourceビルド)
+.  
+```build/bin```ディレクトリ以下に実行ファイル
+- ```init_sine```(初期値作成プログラム)
+- ```forward```(時間積分プログラム)
+
+が生成される．
+この実行ファイルは実行ディレクトリ```run```へシンボリックリンクでリンクされている．
+
+### Cmakeを使ったコンパイル
+トップディレクトリ内で
+```
+./compile.bash
+```
+を実行する．
+### Cmakeを使わないコンパイル
+トップディレクトリ内で
+```
+./compile_no_use_cmake.bash
+```
+を実行する．
+### clean
+トップディレクトリ内で
+```
+./clean.bash
+```
+を実行することでビルドでできるファイルを削除する．
+
+
 ## Usage
 ### ディレクトリ構造
 |ディレクトリ名|説明|
