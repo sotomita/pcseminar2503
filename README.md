@@ -1,7 +1,5 @@
 # 2025年度・PCゼミ第3回
 
-
-
 ## 問題設定
 偏微分方程式を数値的に解き，NetCDF形式で出力する．  
 $0 \le x \le 1, 0 \le y \le 1$の範囲で
@@ -16,7 +14,7 @@ u(0,y)=u(1,y)=u(x,0)=u(x,1)=0
 $u=u(x,y,t)$は無次元温度，$F=F(x,y)$ は強制項(熱源)とする．
 
 ### 時間・空間離散化
-簡単のため，$x$,$y$方向を同じグリッド数で離散化する．
+簡単のためx,y 方向を同じグリッド数で離散化する．
 ```math
 n_x = n_y
 ```
@@ -43,8 +41,11 @@ u^{(t+1)}(i,j) = u^{(t)}(i,j) + \frac{\delta t}{\delta h^2} \lbrack u^{(t)}(i-1,
 - tqdm
 - ffmpeg
 
+
+環境構築例
+- [Miniconda](./doc/miniconda_install.md)
 ## データダウンロード
-強制項を表すファイルは[ここから](https://drive.google.com/file/d/1ce9I2_WtM37T9ivTh3FmA1rdrERCUxmT/view?usp=sharing)ダウンロードし，```run/data```ディレクトリ直下に置く．
+強制項を保存したファイルは[ここから](https://drive.google.com/file/d/1ce9I2_WtM37T9ivTh3FmA1rdrERCUxmT/view?usp=sharing)ダウンロードし，```run/data```ディレクトリ直下に置く．
 
 ## Build
 ```build```ディレクトリ内でビルドする(out-of sourceビルド)
@@ -159,7 +160,7 @@ u^{(t+1)}(i,j) = u^{(t)}(i,j) + \frac{\delta t}{\delta h^2} \lbrack u^{(t)}(i-1,
 u^{(t+1)}(i,j) = u^{(t)}(i,j) + \frac{\delta t}{\delta h^2} \lbrack u^{(t+1)}(i-1,j) + u^{(t)}(i+1,j)+ u^{(t+1)}(i,j-1)+u^{(t)}(i,j+1)-4u^{(t)}(i,j) \rbrack + \delta t F(i,j)
 ```
   
-さらに収束を早める手法として逐次過緩和法(Successive Over Relaxation method;SOR method)がある．
+さらに収束を早める手法として逐次過緩和(Successive Over Relaxation; SOR)法がある．
 ```math
 u^{(t+1)}(i,j) = u^{(t)}(i,j) + \alpha \frac{\delta t}{\delta h^2} \lbrack u^{(t+1)}(i-1,j) + u^{(t)}(i+1,j)+ u^{(t+1)}(i,j-1)+u^{(t)}(i,j+1)-4u^{(t)}(i,j) \rbrack + \delta t F(i,j)
 ```
