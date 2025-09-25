@@ -6,6 +6,7 @@ import xarray as xr
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
+a = np.arange()
 
 fig_dir = "./fig/output"
 fpath = "./data/output.nc"
