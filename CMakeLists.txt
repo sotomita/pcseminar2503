@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(pcsemi2503 LANGUAGES Fortran)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O3")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
