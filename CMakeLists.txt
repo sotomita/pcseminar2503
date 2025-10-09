@@ -11,7 +11,6 @@ set(SOURCES
     src/init_sine.f90
 )
 add_executable(init_sine ${SOURCES})
-
 target_include_directories(init_sine PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_directories(init_sine PRIVATE ${CMAKE_SOURCE_DIR}/lib)
 
