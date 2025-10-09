@@ -63,5 +63,4 @@ bin
 # figure
 run/fig
 
-run/init_sine
-run/forward
+.fortls
